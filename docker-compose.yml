@@ -1,0 +1,25 @@
+volumes:
+  dbdata:
+    external: false
+
+networks:
+  spring:
+    driver: bridge
+
+services:
+
+  mysql:
+    image: docker.io/library/mysql:lts
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: "student_tracker"
+      MYSQL_USER: "student"
+      MYSQL_PASSWORD: "student"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ROOT_HOST: "%" # Remove in production.
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - spring
