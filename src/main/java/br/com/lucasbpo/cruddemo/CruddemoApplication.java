@@ -18,8 +18,18 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
 //			createStudent(studentDAO);
-			readStudent(studentDAO);
+//			readStudent(studentDAO);
+			queryStudents(studentDAO);
 		};
+	}
+
+	private void queryStudents(StudentDAO studentDAO) {
+
+		var students = studentDAO.findAll();
+
+		for (Student student : students) {
+			System.out.println(student);
+		}
 	}
 
 	private void readStudent(StudentDAO studentDAO) {
