@@ -19,8 +19,30 @@ public class CruddemoApplication {
 		return runner -> {
 //			createStudent(studentDAO);
 //			readStudent(studentDAO);
-			queryStudents(studentDAO);
+//			queryStudents(studentDAO);
+//			queryStudentsByLastName(studentDAO);
+			updateStudent(studentDAO);
 		};
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+
+		Long studentId = 1L;
+		var student = studentDAO.findById(studentId);
+
+		student.setFirstName("Scooby");
+		studentDAO.update(student);
+
+		System.out.printf("Updated student: %s%n", student);
+	}
+
+	private void queryStudentsByLastName(StudentDAO studentDAO) {
+
+		var students = studentDAO.findByLastName("Doe");
+
+		for (Student student : students) {
+			System.out.println(student);
+		}
 	}
 
 	private void queryStudents(StudentDAO studentDAO) {
